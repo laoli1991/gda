@@ -519,7 +519,7 @@ a cite {
 }
 
 .layui-form-item {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     clear: both;
     *zoom: 1
 }
@@ -542,7 +542,7 @@ a cite {
 }
 
 .layui-form-item .layui-inline {
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     margin-right: 10px
 }
 
@@ -551,7 +551,7 @@ a cite {
 }
 
 .layui-input-block {
-    margin-left: 110px;
+    margin-left: 150px;
     min-height: 36px
 }
 
@@ -819,7 +819,7 @@ a cite {
 }
 
 .layui-form-pane .layui-form-label {
-    width: 60px;
+    width: 100px;
     line-height: 20px;
     border: 1px solid #e6e6e6;
     border-radius: 2px 0 0 2px;
@@ -839,8 +839,8 @@ a cite {
 }
 
 .layui-form-pane .layui-input-block {
-    margin-left: 112px;
-    left: -1px
+    /*margin-left: 20px;*/
+    /*left: -1px;*/
 }
 
 .layui-form-pane .layui-input {
@@ -993,6 +993,7 @@ a cite {
     width: 100%;
     margin: 10px 0;
     background-color: #f2f2f2;
+
 }
 
 .layui-table tr {

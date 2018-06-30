@@ -1,19 +1,15 @@
 package com.da.vo;
 
-import java.util.Date;
-
 /**
  * @Author: liyang117
  * @Date: 2018/6/30 12:57
  * @Description:
  */
-public class TeacherVo {
-
-    private Integer id;
+public class TeacherRequest {
 
     private String name;
 
-    private String sex;
+    private Integer sex;
 
     private String identityNO;
 
@@ -23,7 +19,7 @@ public class TeacherVo {
 
     private String identityImgSrc;
 
-    private String education;
+    private Integer education;
 
     private String updateBy;
 
@@ -35,11 +31,11 @@ public class TeacherVo {
         this.name = name;
     }
 
-    public String getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
@@ -75,11 +71,11 @@ public class TeacherVo {
         this.identityImgSrc = identityImgSrc;
     }
 
-    public String getEducation() {
+    public Integer getEducation() {
         return education;
     }
 
-    public void setEducation(String education) {
+    public void setEducation(Integer education) {
         this.education = education;
     }
 
@@ -91,11 +87,4 @@ public class TeacherVo {
         this.updateBy = updateBy;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

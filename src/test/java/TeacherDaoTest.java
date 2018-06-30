@@ -42,12 +42,11 @@ public class TeacherDaoTest extends AbstractTest {
     @Test
     public void testFindTeachers() {
         TeacherQueryCondition queryCondition = new TeacherQueryCondition();
-        queryCondition.setName("李连杰");
-        PageHelper.startPage(0, 5);
+        PageHelper.startPage(1, 8);
         //startPage后紧跟的这个查询就是分页查询
         List<Teacher> teachers = teacherDao.findTeachers(queryCondition);
         //使用PageInfo包装查询结果，只需要将pageInfo交给页面就可以
-        PageInfo pageInfo = new PageInfo<Teacher>(teachers, 5);
+        PageInfo pageInfo = new PageInfo<Teacher>(teachers, 8);
         //pageINfo封装了分页的详细信息，也可以指定连续显示的页数
         System.out.println(JSON.toJSONString(pageInfo));
     }

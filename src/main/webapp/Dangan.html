@@ -16,21 +16,21 @@
 </head>
 <body>
 <div class="x-nav"><span class="layui-breadcrumb"> <a><cite>档案管理</cite></a> <a><cite>档案查询</cite></a> </span></div>
-<div class="dangan-x-body">
+<div class="dangan-x-body" ng-app="dafind" ng-controller="dafindCtrl">
     <div class="">
         <div class="col-sm-8">
             <div>
                 <div class="row">
                     <label class="col-sm-4 control-label">姓名</label>
-                    <input type="text" class="col-sm-8 control-label">
+                    <input type="text" class="col-sm-8 control-label" ng-model="teacherQuery.name">
                 </div>
                 <div class="row">
                     <label class="col-sm-4 control-label">教师编号</label>
-                    <input type="text" class="col-sm-8 control-label">
+                    <input type="text" class="col-sm-8 control-label" ng-model="teacherQuery.teacherNo">
                 </div>
                 <div class="row">
                     <label class="col-sm-4 control-label">身份证号</label>
-                    <input type="text" class="col-sm-8 control-label">
+                    <input type="text" class="col-sm-8 control-label" ng-model="teacherQuery.identityNO">
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     <br>
                 </div>
                 <div class="text-center">
-                    <button class="layui-btn" ng-click="">
+                    <button class="layui-btn" ng-click="findTeachers(teacherQuery,1)">
                         查询
                     </button>
                 </div>
@@ -49,208 +49,137 @@
     </div>
 
     <div class="tools">
-        <ul class="toolbar">
-            <li><span><img src="images/t03.png"/></span>批量删除</li>
-            <li onclick="user_management_add('添加用户','Dangan-add.html','1000','600')"><span><img
-                    src="images/t01.png"/></span>添加
-            </li>
-            <li onclick="user_management_edit('用户编辑','Dangan-edit.html','600','500')"><span><img src="images/t02.png"/></span>编辑
-            </li>
-            <li onclick="user_management_show('用户查看','Dangan-look.html','600','500')"><span><img src="images/t06.png"/></span>查看
-            </li>
-        </ul>
-        <span class="x-right" style="line-height:25px">共有数据：88 条</span></xblock>
+
     </div>
     <table class="tablelist">
         <thead>
         <tr>
-            <th><input onclick="selectAll()" type="checkbox" name="controlAll" style="controlAll" id="controlAll">
-            </th>
             <th>姓名</th>
-            <th> 性别</th>
-            <th> 籍贯</th>
-            <th> 年龄</th>
-            <th> 文化程度</th>
-            <th> 宗教信仰</th>
-            <th> 联系电话</th>
-            <th> 操作</th>
+            <th>身份证</th>
+            <th>编号</th>
+            <th>详情</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><input type="checkbox" value="1" name="selected"></td>
-            <td>张三</td>
-            <td>男</td>
-            <td> 安徽</td>
-            <td> 12</td>
-            <td> 初中</td>
-            <td> 佛教</td>
-            <td>15812345678</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
+        <tr ng-repeat="teacher in teachers">
+            <td> {{teacher.name}}</td>
+            <td> {{teacher.identityNO}}</td>
+            <td> {{teacher.teacherNo}}</td>
+            <td>
+                <li ng-click="userInfo('档案详情','Dangan-look.html','1000','600', teacher)">
+                    <span><img src="images/t06.png"/></span>
+                </li>
+            </td>
         </tr>
-        <tr>
-            <td><input type="checkbox" value="2" name="selected"></td>
-            <td> 李四</td>
-            <td>女</td>
-            <td>安徽</td>
-            <td> 54</td>
-            <td>小学</td>
-            <td>伊斯兰教</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="3" name="selected"></td>
-            <td> 王五</td>
-            <td>男</td>
-            <td>安徽</td>
-            <td> 32</td>
-            <td> 初中</td>
-            <td>无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="4" name="selected"></td>
-            <td> 赵六</td>
-            <td>男</td>
-            <td>安徽</td>
-            <td> 25</td>
-            <td> 高中</td>
-            <td>无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="5" name="selected"></td>
-            <td>王八</td>
-            <td>男</td>
-            <td> 安徽</td>
-            <td> 23</td>
-            <td> 高中</td>
-            <td> 无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="6" name="selected"></td>
-            <td> 爱丽丝</td>
-            <td>女</td>
-            <td> 安徽</td>
-            <td> 28</td>
-            <td> 高中</td>
-            <td> 无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="7" name="selected"></td>
-            <td> 伊丽莎白</td>
-            <td>女</td>
-            <td> 安徽</td>
-            <td> 18</td>
-            <td>大专</td>
-            <td> 无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="8" name="selected"></td>
-            <td> 小明</td>
-            <td>男</td>
-            <td> 安徽</td>
-            <td> 25</td>
-            <td>大专</td>
-            <td> 无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="9" name="selected"></td>
-            <td> 小李</td>
-            <td>男</td>
-            <td> 安徽</td>
-            <td>23</td>
-            <td> 初中</td>
-            <td> 无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value="10" name="selected"></td>
-            <td> 丽丽</td>
-            <td>女</td>
-            <td> 安徽</td>
-            <td> 22</td>
-            <td> 高中</td>
-            <td> 无</td>
-            <td>15856123650</td>
-            <td><a href="test.html">
-                <button class="sp">心理诊断</button>
-            </a></td>
-        </tr>
+
         </tbody>
     </table>
     <div class="page" v-show="show">
-        <div class="pagelist"><span class="jump">上一页</span> <span class="jump">1</span> <span class="jump">2</span>
-            <span class="jump">3</span> <span class="jump">4</span> <span class="jump">5</span> <span
-                    class="jump">6</span> <span class="ellipsis">...</span> <span class="jump">下一页</span> <span
-                    class="jumppoint">跳转到：</span> <span class="jumpinp">
-    <input type="text">
-    </span> <span class="jump gobtn">GO</span></div>
+        <div class="pagelist">
+            <span class="jump" ng-click="findOffPageTeachers(teacherQuery, -1)">上一页</span>
+            <span class="ellipsis">(第{{pageNum}}页)</span>
+            <span class="jump" ng-click="findOffPageTeachers(teacherQuery, 1)">下一页</span>
+            <span class="x-right">&nbsp;&nbsp;共有{{totalCount}}条数据</span></xblock>
+        </div>
     </div>
-</div>
-<br/>
-<br/>
-<br/>
-<script src="./lib/layui/layui.js" charset="utf-8"></script>
-<script src="./js/x-layui.js" charset="utf-8"></script>
-<script src="js/jquery2.js" charset="utf-8"></script>
-<script src="js/js.js" charset="utf-8"></script>
-<script>
-    layui.use(['laydate', 'element', 'laypage', 'layer'], function () {
-        $ = layui.jquery;
-        lement = layui.element();//面包导航
-        laypage = layui.laypage;//分页
-        layer = layui.layer;//弹出层
+    <br/>
+    <br/>
+    <br/>
+    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script src="./js/x-layui.js" charset="utf-8"></script>
+    <script src="js/jquery2.js" charset="utf-8"></script>
+    <script src="js/js.js" charset="utf-8"></script>
+    <script src="js/angular.js" charset="utf-8"></script>
+    <script>
 
-    });
 
-    /*用户-添加*/
-    function user_management_add(title, url, w, h) {
-        x_admin_show(title, url, w, h);
-    }
+        var app = angular.module('dafind', []);
+        app.controller('dafindCtrl', ["$scope", '$http', '$q', function ($scope, $http, $q) {
 
-    /*用户-查看*/
-    function user_management_show(title, url, w, h) {
-        x_admin_show(title, url, w, h);
-    }
+            $('.tablelist tbody tr:odd').addClass('odd');
 
-    // 用户-编辑
-    function user_management_edit(title, url, w, h) {
-        x_admin_show(title, url, w, h);
-    }
-</script>
-<script type="text/javascript">
-    $('.tablelist tbody tr:odd').addClass('odd');
-</script>
+            layui.use(['laydate', 'element', 'laypage', 'layer'], function () {
+                $ = layui.jquery;
+                lement = layui.element();//面包导航
+                laypage = layui.laypage;//分页
+                layer = layui.layer;//弹出层
+
+            });
+
+            /*用户-添加*/
+            function user_management_add(title, url, w, h) {
+                x_admin_show(title, url, w, h);
+            }
+
+            /*用户-查看*/
+            $scope.userInfo = function(title, url, w, h,teacher) {
+                console.log("sdsdsd")
+                show_userInfo(title, url, w, h,teacher.id);
+            }
+
+            // 用户-编辑
+            function user_management_edit(title, url, w, h) {
+                x_admin_show(title, url, w, h);
+            }
+
+            $scope.findTeachers = function (teacherQuery, pageNO) {
+                if (teacherQuery == undefined) {
+                    teacherQuery = {};
+                }
+                layer.load(1, {shade: false});
+                $scope.addTeachering = true;
+                $http({
+                    method: 'post',
+                    url: '../api/find-teachers',
+                    data: {
+                        "name": teacherQuery.name,
+                        "identityNO": teacherQuery.identityNO,
+                        "teacherNo": teacherQuery.teacherNo,
+                        "pageNO": pageNO
+                    }
+                }).then(function (req) {
+                    layer.closeAll("loading");
+                    $scope.addTeachering = false;
+                    $scope.teachers = req.data.teacherVos;
+                    $scope.teachers = req.data.teacherVos;
+                    $scope.totalCount = req.data.totalCount;
+                    $scope.pageNum = req.data.pageNum;
+                    $scope.totalPages = req.data.totalPages;
+                })
+            };
+
+            $http({
+                method: 'post',
+                url: '../api/find-teachers',
+                data: {
+                    "name": null,
+                    "identityNO": null,
+                    "teacherNo": null,
+                    "pageNO": 1
+                }
+            }).then(function (req) {
+                $scope.addTeachering = false;
+                $scope.teachers = req.data.teacherVos;
+                $scope.teachers = req.data.teacherVos;
+                $scope.totalCount = req.data.totalCount;
+                $scope.pageNum = req.data.pageNum;
+                $scope.totalPages = req.data.totalPages;
+            });
+
+
+            $scope.findOffPageTeachers = function (teacherQuery, off) {
+                pageNO = $scope.pageNum + off;
+                if (pageNO < 1 || pageNO > $scope.totalPages) {
+                    return;
+                }
+                $scope.findTeachers(teacherQuery, pageNO);
+            };
+
+        }]);
+
+    </script>
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
 </body>
 </html>

@@ -1,8 +1,13 @@
-package com.da.condition;
+package com.da.vo;
 
-import java.util.Date;
+import com.github.pagehelper.PageInfo;
 
-public class TeacherQueryCondition {
+/**
+ * @Author: liyang117
+ * @Date: 2018/6/30 16:47
+ * @Description:
+ */
+public class FindTeacherRequest {
     private String name;
     private String identityNO;
     private String teacherNo;
