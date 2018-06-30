@@ -291,7 +291,7 @@
 
 
     <build>
-        <finalName>gjk</finalName>
+        <finalName>gda</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.da.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.da.po.Teacher">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Sex" jdbcType="INTEGER" property="sex" />
+    <result column="IdentityNO" jdbcType="VARCHAR" property="identityNO" />
+    <result column="TeacherNo" jdbcType="VARCHAR" property="teacherNo" />
+    <result column="BirthPlace" jdbcType="VARCHAR" property="birthPlace" />
+    <result column="IdentityImgSrc" jdbcType="VARCHAR" property="identityImgSrc" />
+    <result column="Education" jdbcType="INTEGER" property="education" />
+    <result column="UpdateBy" jdbcType="VARCHAR" property="updateBy" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Name, Sex, IdentityNO, TeacherNo, BirthPlace, IdentityImgSrc, Education, UpdateBy, 
+    CreateTime, UpdateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DA_Teacher
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from DA_Teacher
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.da.po.Teacher">
+    insert into DA_Teacher (Id, Name, Sex, 
+      IdentityNO, TeacherNo, BirthPlace, 
+      IdentityImgSrc, Education, UpdateBy, 
+      CreateTime, UpdateTime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{identityNO,jdbcType=VARCHAR}, #{teacherNo,jdbcType=VARCHAR}, #{birthPlace,jdbcType=VARCHAR}, 
+      #{identityImgSrc,jdbcType=VARCHAR}, #{education,jdbcType=INTEGER}, #{updateBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.da.po.Teacher">
+    insert into DA_Teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="sex != null">
+        Sex,
+      </if>
+      <if test="identityNO != null">
+        IdentityNO,
+      </if>
+      <if test="teacherNo != null">
+        TeacherNo,
+      </if>
+      <if test="birthPlace != null">
+        BirthPlace,
+      </if>
+      <if test="identityImgSrc != null">
+        IdentityImgSrc,
+      </if>
+      <if test="education != null">
+        Education,
+      </if>
+      <if test="updateBy != null">
+        UpdateBy,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="identityNO != null">
+        #{identityNO,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherNo != null">
+        #{teacherNo,jdbcType=VARCHAR},
+      </if>
+      <if test="birthPlace != null">
+        #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="identityImgSrc != null">
+        #{identityImgSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=INTEGER},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.da.po.Teacher">
+    update DA_Teacher
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        Sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="identityNO != null">
+        IdentityNO = #{identityNO,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherNo != null">
+        TeacherNo = #{teacherNo,jdbcType=VARCHAR},
+      </if>
+      <if test="birthPlace != null">
+        BirthPlace = #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="identityImgSrc != null">
+        IdentityImgSrc = #{identityImgSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        Education = #{education,jdbcType=INTEGER},
+      </if>
+      <if test="updateBy != null">
+        UpdateBy = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.da.po.Teacher">
+    update DA_Teacher
+    set Name = #{name,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=INTEGER},
+      IdentityNO = #{identityNO,jdbcType=VARCHAR},
+      TeacherNo = #{teacherNo,jdbcType=VARCHAR},
+      BirthPlace = #{birthPlace,jdbcType=VARCHAR},
+      IdentityImgSrc = #{identityImgSrc,jdbcType=VARCHAR},
+      Education = #{education,jdbcType=INTEGER},
+      UpdateBy = #{updateBy,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
