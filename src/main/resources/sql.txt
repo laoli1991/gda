@@ -14,9 +14,10 @@ CREATE TABLE `DA_Teacher` (
   `CreateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `UpdateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`Id`),
+  UNIQUE KEY `IdentityNO` (`IdentityNO`),
+  UNIQUE KEY `TeacherNo` (`TeacherNo`),
   KEY `IX_UpdateTime` (`UpdateTime`),
   KEY `IX_IdentityNO` (`IdentityNO`),
   KEY `IX_TeacherNo` (`TeacherNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=220067 DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=220094 DEFAULT CHARSET=utf8;
 

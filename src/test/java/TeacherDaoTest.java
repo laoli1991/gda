@@ -1,8 +1,13 @@
 import com.alibaba.fastjson.JSON;
+import com.da.condition.TeacherQueryCondition;
 import com.da.dao.TeacherMapper;
 import com.da.po.Teacher;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @Author: liyang117
@@ -30,8 +35,22 @@ public class TeacherDaoTest extends AbstractTest {
 
     @Test
     public void testSelectByPrimaryKey() {
-        Teacher teacher = teacherDao.selectByPrimaryKey(220067);
+        Teacher teacher = teacherDao.selectByPrimaryKey(220094);
         System.out.println(JSON.toJSONString(teacher));
     }
+
+    @Test
+    public void testFindTeachers() {
+        TeacherQueryCondition queryCondition = new TeacherQueryCondition();
+        queryCondition.setName("李连杰");
+        PageHelper.startPage(0, 5);
+        //startPage后紧跟的这个查询就是分页查询
+        List<Teacher> teachers = teacherDao.findTeachers(queryCondition);
+        //使用PageInfo包装查询结果，只需要将pageInfo交给页面就可以
+        PageInfo pageInfo = new PageInfo<Teacher>(teachers, 5);
+        //pageINfo封装了分页的详细信息，也可以指定连续显示的页数
+        System.out.println(JSON.toJSONString(pageInfo));
+    }
+
 
 }

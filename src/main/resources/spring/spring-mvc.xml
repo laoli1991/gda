@@ -34,13 +34,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <bean id="propertyConfigurer" class="com.da.utils.PropertiesUtils">
-        <property name="locations">
-            <list>
-                <value>classpath:app.properties</value>
-            </list>
-        </property>
-    </bean>
+
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

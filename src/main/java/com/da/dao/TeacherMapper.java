@@ -1,6 +1,9 @@
 package com.da.dao;
 
+import com.da.condition.TeacherQueryCondition;
 import com.da.po.Teacher;
+
+import java.util.List;
 
 public interface TeacherMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface TeacherMapper {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+
+    List<Teacher> findTeachers(TeacherQueryCondition teacher);
 }
