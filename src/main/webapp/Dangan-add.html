@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>用户管理-编辑</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,27 +18,30 @@
         <tbody>
         <tr>
             <td><span class="x-red">*</span>姓名</td>
-            <td><input type="text" id="link" name="link" class="layui-input"></td>
+            <td><input type="text" class="layui-input" ng-model="teacher.name"></td>
         </tr>
         <tr>
             <td><span class="x-red">*</span>姓别</td>
-            <td><input type="text" id="link" name="link" class="layui-input"></td>
+            <td><select lay-verify="required" name="cid" class="layui-input" ng-model="teacher.sex">
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select></td>
         </tr>
         <tr>
             <td><span class="x-red">*</span>身份证</td>
-            <td><input type="text" id="link" name="link" class="layui-input"></td>
+            <td><input type="text" class="layui-input" ng-model="teacher.identityNO"></td>
         </tr>
         <tr>
             <td><span class="x-red">*</span>编号</td>
-            <td><input type="text" id="link" name="link" class="layui-input"></td>
+            <td><input type="text" class="layui-input" ng-model="teacher.teacherNo"></td>
         </tr>
         <tr>
             <td><span class="x-red">*</span>籍贯</td>
-            <td><input type="text" id="link" name="link" class="layui-input"></td>
+            <td><input type="text" class="layui-input" ng-model="teacher.birthPlace"></td>
         </tr>
         <tr>
             <td><span class="x-red">*</span>学历</td>
-            <td><select lay-verify="required" name="cid" class="layui-input">
+            <td><select lay-verify="required" name="cid" class="layui-input" ng-model="teacher.education">
                 <option value="1">大学专科</option>
                 <option value="2">大学本科</option>
                 <option value="3">硕士研究生</option>
@@ -49,9 +51,10 @@
         <tr>
             <td colspan="2">
                 <span class="x-red">*</span>身份证照片
-                <input type="file" id="file" multiple="multiple" accept="image/*"/>
+                <input type="file" id="file" multiple="multiple" accept="image/*" ng-disabled="addTeachering"/>
                 <div style="text-align:right;">
-                    <button type="button" ng-click="save()"><img src="images/sctp.png"></button>
+                    <button type="button" ng-click="save()" ng-disabled="addTeachering"><img src="images/sctp.png">
+                    </button>
                 </div>
                 <br>
                 <img ng-src="{{imgSrc}}" width="100%" height="400" ng-show="idImgShow"
@@ -62,7 +65,7 @@
 
         <tr>
             <td colspan="2" align="center">
-                <button class="layui-btn"> 保存</button>
+                <button class="layui-btn" ng-click="addTeacher(teacher)"> 保存</button>
             </td>
         </tr>
         </tbody>
@@ -111,10 +114,12 @@
     var app = angular.module('daAdd', []);
     app.controller('daAddCtrl', ["$scope", '$http', '$q', function ($scope, $http, $q) {
         $scope.idImgShow = false;
+        $scope.addTeachering = false;
         $scope.save = function () {
             var fd = new FormData();
             var file = document.querySelector('input[type=file]').files[0];
             if (file == undefined) {
+                layer.alert("请上传身份证照片！");
                 return;
             }
             fd.append("file", file);
@@ -129,7 +134,7 @@
                 if (response.data.status == "seccessed") {
                     $scope.imgPath = response.data.imgPath;
                     $scope.imgSrc = response.data.imgSrc;
-                    console.log($scope.imgSrc);
+                    $scope.uuidFileName = response.data.uuidFileName;
                     $scope.idImgShow = true;
                 }
                 else {
@@ -141,7 +146,42 @@
 
         $scope.user_management_add = function (title, url, w, h, imgSrc) {
             x_admin_show(title, url, w, h, imgSrc);
-        }
+        };
+
+        $scope.addTeacher = function (teacher) {
+            if (teacher == undefined || teacher.name == undefined || teacher.sex == undefined
+                || teacher.identityNO == undefined || teacher.teacherNo == undefined
+                || teacher.birthPlace == undefined || $scope.uuidFileName == undefined || teacher.education == undefined) {
+                layer.alert("请填写完整信息！");
+                return;
+            }
+            layer.load(1, {shade: false});
+            $scope.addTeachering = true;
+            $http({
+                method: 'post',
+                url: '../api/add-teatcher',
+                data: {
+                    "name": teacher.name,
+                    "sex": teacher.sex,
+                    "identityNO": teacher.identityNO,
+                    "teacherNo": teacher.teacherNo,
+                    "birthPlace": teacher.birthPlace,
+                    "identityImgSrc": $scope.uuidFileName,
+                    "education": teacher.education,
+                    "updateBy": "adm",
+                }
+            }).then(function (req) {
+                layer.closeAll("loading");
+                $scope.addTeachering = false;
+                console.log(req);
+                if (req.data == "true") {
+                    layer.alert("保存成功！");
+                }
+                else {
+                    layer.alert("保存失败！");
+                }
+            })
+        };
 
 
     }]);
